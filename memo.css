@@ -1,0 +1,104 @@
+/* Enables vertical table scrolling */
+.memoTableScroll{
+    height: 600px !important;
+    overflow: scroll;
+}
+th{
+    background-color: #218aa5;
+    font-family: 'Patua One', cursive;
+    text-align: center;
+    font-size: 1.25em;
+}
+td { 
+    padding:15px;
+    border:solid #17191a 5px;
+} 
+td.center { 
+    text-align:center;
+}
+td.noBox { 
+    border:none;
+}
+body { 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    font-family: 'Patua One', cursive;
+}
+/*NAV BAR STUFF*/
+.navbar-default{
+    font-family: 'Patua One', cursive; 
+    background: #218aa5;
+    border: #218aa5;
+}
+.navbar-default .navbar-nav > li > a {
+    color:black;
+    font-size: 1.1em;
+}
+.navbar-default .navbar-brand {
+    color: black;
+}
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+    color: white;
+}
+.navbar-default .navbar-toggle {
+    border-color: black;
+    color: black;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: black;
+}
+/*NAV BAR STUFF*/
+.fa-flag:hover {
+    color: white;
+}
+
+/*Intro Section Formatting*/
+#introContent{
+    padding-top: 5%;
+    color:white;
+    text-align: center;
+    font-size: 2em;
+}
+#introBackground{
+    background-color: rgba(182, 107, 17, 0.81);
+    width:100%;
+}
+
+.navBarSearchForm{
+    margin-top:10px;
+    margin-right: 5px;
+    border:solid rgb(1, 15, 1) 2px;
+    
+}
+#addMemoContent{
+    padding-top: 5%;
+    color:rgb(2, 2, 2);
+    text-align: left;
+    font-size: 2em;
+}
+#addMemoBackground{
+    background-color: rgba(182, 107, 17, 0.81);
+    width:100%;
+}
+#addMemoForm{
+    align-content: center;
+}
+
+/* This prevents the navbar collpasing on certain resolutions */
+.navbar-collapse.collapse {
+    display: block!important;
+  }
+  
+  .navbar-nav>li, .navbar-nav {
+    float: left !important;
+  }
+  
+  .navbar-nav.navbar-right:last-child {
+    margin-right: -15px !important;
+  }
+  
+  .navbar-right {
+    float: right!important;
+  }
