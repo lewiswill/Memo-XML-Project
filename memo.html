@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Memo Machine</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Patua+One" rel="stylesheet">
+<link rel="stylesheet" href="memo.css">
+    <script type="text/javascript">
+        var items;
+        if (window.XMLHttpRequest) { // IE7+, Firefox, Chrome, Opera, Safari
+            var xmlhttp=new XMLHttpRequest();
+        } else { // IE6, IE5
+            var xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.open("GET","memo.xml?p="+Math.random(),false); // modifed the open request to prevent browser caching issues
+        xmlhttp.send();
+        xmlDoc=xmlhttp.responseXML;
+        items=xmlDoc.getElementsByTagName("memo");
+
+
+        function liveMemoTable() {
+
+        document.write("<tr><th>ID</th><th>Title</th><th>Author</th><th>Recipients</th><th>Date</th><th>Message</th><th>URL</th></tr>");
+
+        // my 'liveMemoTable' is a modifed version of the for loop found in one of our practical lessons.
+            for (var i=0; i<=items.length; i++) {
+
+                id=items[i].getAttribute("id");
+                memoTitle=items[i].getElementsByTagName("title")[0].childNodes[0].nodeValue;
+                sender=items[i].getElementsByTagName("sender")[0].childNodes[0].nodeValue;
+                recipients=items[i].getElementsByTagName("recipients")[0].childNodes[0].nodeValue;
+                date=items[i].getElementsByTagName("date")[0].childNodes[0].nodeValue;
+                message=items[i].getElementsByTagName("message")[0].childNodes[0].nodeValue;
+                url=items[i].getElementsByTagName("url")[0].childNodes[0].nodeValue;
+                
+                var mid=id;
+
+                document.write("<tr><td class='center'>"+id+"</td>"+
+                    "<td class='center'><a href='viewmemov2.php?mid="+mid+"'>"+memoTitle+"</a></td>"+
+                    "<td class='center'>"+sender+"</td>"+
+                    "<td class='center'>"+recipients+"</td>"+
+                    "<td class='center'>"+date+"</td>"+
+                    "<td class='center'>"+message+"</td>"+
+                    "<td class='center'>"+url+"</td></tr>");
+
+            }
+        }
+        // I based the 3 following functions off the W3 Schools 'Filter Tables' Source: https://www.w3schools.com/howto/howto_js_filter_table.asp
+        function liveDateSearch() {
+            // variables
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("inputDate");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("memoTable");
+            tr = table.getElementsByTagName("tr");
+
+            // This will Loop through the table row and hide any entries that don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[4];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+        // filter table
+        function liveSenderSearch() {
+            // variables
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("inputSender");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("memoTable");
+            tr = table.getElementsByTagName("tr");
+
+            // This will Loop through the table row and hide any entries that don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[2];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+        //filter table
+        function liveRecipientSearch() {
+            // variables
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("inputRecipient");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("memoTable");
+            tr = table.getElementsByTagName("tr");
+
+            // This will Loop through the table row and hide any entries that don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[3];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+<!--NavBar Start-->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-center hidden-xs">
+                <li><a href="memo.html">View Memos</a></li>
+                <li><a href="addMemo.php">Add Memo</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right hidden-xs">
+                <li><a>Search Memo by:</a></li>
+                <li>
+                    <form class="navBarSearchForm">
+                        <input id="inputDate" type="text" size="30" placeholder="Date" onkeyup="liveDateSearch()">
+                        </form>
+                </li>
+                <li>
+                    <form class="navBarSearchForm">
+                        <input id="inputSender" type="text" size="30" id="fieldSender" placeholder="Sender" onkeyup="liveSenderSearch()">
+                        </form>
+                </li>
+                <li>
+                    <form class="navBarSearchForm">
+                        <input id="inputRecipient" type="text" size="30" id="fieldRecipient" placeholder="Recipient" onkeyup="liveRecipientSearch()">
+                        </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>  
+<!--NavBar End-->
+
+<div id="introBackground">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="introContent">
+                    <h1>The Memo Machine</h1>
+                    <hr>
+                    <script type="text/javascript">
+                        document.write("<p>Currently, " + items.length + " memos are stored.</p>");
+                    </script>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="memoTableScroll">
+            <table id="memoTable" class="table table-bordered table-hover">
+                <caption class="text-center">
+                </caption>
+                <script type="text/javascript">liveMemoTable()</script>          
+            </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> <!-- JQuery used by Boostrap / Navbar-->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvy-xsfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> <!-- JQuery used by Boostrap / Navbar-->
+</body>
+</html>
